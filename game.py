@@ -1,4 +1,4 @@
-# prompt: create car racing game
+# prompt: create box racing game
 
 import pygame
 import random
@@ -14,22 +14,22 @@ BLUE = (0, 0, 255)
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
-# Define the speed of the car
+# Define the speed of the box
 box_SPEED = 5
 
-# Define the number of lanes on the road
+# Define the number of lanes on the way
 NUM_LANES = 3
 
 # Define the width of each lane
 LANE_WIDTH = SCREEN_WIDTH / NUM_LANES
 
-# Define the height of each car
+# Define the height of each box
 box_HEIGHT = 50
 
-# Define the width of each car
+# Define the width of each box
 box_WIDTH = 25
 
-# Define the starting position of the player's car
+# Define the starting position of the player's box
 PLAYER_box_X = LANE_WIDTH * 1
 PLAYER_box_Y = SCREEN_HEIGHT - box_HEIGHT
 
@@ -46,13 +46,13 @@ clock = pygame.time.Clock()
 # Create a group to hold all the sprites in the game
 all_sprites = pygame.sprite.Group()
 
-# Create a group to hold the player's car
+# Create a group to hold the player's box
 player_box_group = pygame.sprite.Group()
 
-# Create a group to hold the enemy cars
+# Create a group to hold the enemy boxes
 enemy_box_group = pygame.sprite.Group()
 
-# Create the player's car
+# Create the player's box
 player_box = pygame.sprite.Sprite()
 player_box.image = pygame.Surface((box_WIDTH, box_HEIGHT))
 player_box.image.fill(BLUE)
@@ -62,7 +62,7 @@ player_box.rect.y = PLAYER_box_Y
 player_box_group.add(player_box)
 all_sprites.add(player_box)
 
-# Create the enemy cars
+# Create the enemy boxes
 for i in range(10):
     enemy_box = pygame.sprite.Sprite()
     enemy_box.image = pygame.Surface((box_WIDTH, box_HEIGHT))
@@ -86,14 +86,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Update the player's car
+    # Update the player's box
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and player_box.rect.x > 0:
         player_box.rect.x -= box_SPEED
     if keys[pygame.K_RIGHT] and player_box.rect.x < SCREEN_WIDTH - box_WIDTH:
         player_box.rect.x += box_SPEED
 
-    # Update the enemy cars
+    # Update the enemy boxes
     for enemy_car in enemy_box_group:
         enemy_car.rect.y += box_SPEED
         if enemy_car.rect.y > SCREEN_HEIGHT:
@@ -102,7 +102,7 @@ while running:
                #Inceament the score card by time
     score += 1
 
-    # Check for collisions between the player's car and the enemy cars
+    # Check for collisions between the player's box and the enemy boxes
     collisions = pygame.sprite.spritecollide(player_box, enemy_box_group, True)
     if collisions:
         running = False
